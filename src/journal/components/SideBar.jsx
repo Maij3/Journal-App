@@ -34,7 +34,7 @@ export const SideBar = ({ drawerWidth }) => {
         </Toolbar>
         <Divider />
         <List>
-          {["Enero", "Febrero", "Marzon", "Abirl"].map((text) => (
+          {["Enero", "Febrero", "Marzo", "Abirl"].map((text) => (
             <ListItem key ={ text } disablePadding>
               <ListItemButton>
                 <ListItemIcon>
