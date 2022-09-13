@@ -2,6 +2,8 @@ import { SaveOutlined } from "@mui/icons-material";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import {ImageGallery} from "../components";
 
+//NoteViews
+
 export const NoteView = () => {
   return (
     <Grid
