@@ -24,28 +24,22 @@ const formData = {
 };
 
 export const LoginPage = () => {
-  //UseSelector
 
   const { status, errorMessage } = useSelector((state) => state.auth);
 
-  //UseDispatch
 
   const dispatch = useDispatch();
 
-  //Use Form
 
   const { email, password, onInputChange } = useForm(formData);
 
-  //isAuthenticating
 
   const isAuthenticating = useMemo(() => status === "checking", [status]);
 
-  //OnSubmit - Login
 
   const onSubmit = (event) => {
     event.preventDefault();
     console.log(email, password);
-    //! No es Esta la accion a despachar
     //dispatch(checkingAuthentication());
     dispatch(startLoginWithEmailPassword({ email, password }));
   };
