@@ -1,10 +1,12 @@
+import {sendPasswordResetEmail} from "firebase/auth";
+import {FirebaseAuth} from "../../firebase/config";
 import {
   loginWithEmailPassword,
   logoutFirebase,
   registerUserWithEmailPassword,
   singInWithGoogle,
 } from "../../firebase/providers";
-import {clearNotesLogout} from "../journal";
+import { clearNotesLogout } from "../journal";
 import { checkingCredentials, login, logout } from "./authSlice";
 
 //CheckingAuthentication
@@ -51,7 +53,7 @@ export const startLoginWithEmailPassword = ({ email, password }) => {
   return async (dispatch) => {
     dispatch(checkingCredentials());
     const result = await loginWithEmailPassword({ email, password });
-    console.log(result);
+    console.log({ result });
     if (!result.ok) return dispatch(logout(result));
     dispatch(login(result));
   };
@@ -62,5 +64,12 @@ export const startLogout = () => {
     await logoutFirebase();
     dispatch(clearNotesLogout());
     dispatch(logout());
+  };
+};
+
+export const startForgotYourPassword = ({ email }) => {
+  return async (dispatch) => {
+    console.log(email)
+    await sendPasswordResetEmail(FirebaseAuth, email);
   };
 };

@@ -31,6 +31,7 @@ export const NoteView = () => {
   const {
     active: note,
     messageSaved,
+    messageDelete,
     isSaving,
   } = useSelector((state) => state.journal);
 
@@ -49,9 +50,10 @@ export const NoteView = () => {
 
   useEffect(() => {
     if (messageSaved.length > 0) {
-      Swal.fire("Nota Actualizada", messageSaved, "success");
+        Swal.fire("Note Updated", messageSaved, "success");
     }
   }, [messageSaved]);
+
 
   const onSaveNote = () => {
     dispatch(startSaveNote());
@@ -60,7 +62,6 @@ export const NoteView = () => {
   const onFileInputChange = ({ target }) => {
     if (target.files === 0) return;
     dispatch(startUploadingFiles(target.files));
-    console.log("Subiendo Archivos");
   };
 
   const onDelete = () => {
@@ -102,7 +103,7 @@ export const NoteView = () => {
             sx={{ padding: 2 }}
           >
             <SaveOutlined sx={{ fontSize: 30, mr: 1 }} />
-            Guardar
+            Save
           </Button>
         </Grid>
       </Box>
@@ -112,7 +113,7 @@ export const NoteView = () => {
           variant="filled"
           fullWidth
           placeholder="Ingrese un Titulo"
-          label="Titulo"
+          label="Title"
           sx={{ border: "none", mb: 1 }}
           name="title"
           required
@@ -126,7 +127,7 @@ export const NoteView = () => {
           fullWidth
           required
           multiline
-          placeholder="Que sucedio en el dia de hoy?"
+          placeholder="What happened today?"
           minRows={5}
           name="body"
           value={body}
@@ -136,7 +137,7 @@ export const NoteView = () => {
       <Grid container justifyContent="end">
         <Button onClick={onDelete} sx={{ mt: 2 }} color="error">
           <DeleteOutline />
-          Borrar
+          Delete
         </Button>
       </Grid>
       <ImageGallery images={note.imageUrls} />

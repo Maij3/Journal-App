@@ -25,12 +25,12 @@ const formData = {
 //FormValidations
 
 const formValidations = {
-  email: [(value) => value.includes("@"), "El correo debe de tener un @."],
+  email: [(value) => value.includes("@"), "The email must have an @."],
   password: [
     (value) => value.length >= 6,
-    "El password debe de tener mas de 6 letras.",
+    "The password must have more than 6 digits.",
   ],
-  displayName: [(value) => value.length >= 1, "El nombre es requerido."],
+  displayName: [(value) => value.length >= 1, "Name is required."],
 };
 
 
@@ -134,7 +134,7 @@ export const RegisterPage = () => {
                 Do you already have an account ?
               </Typography>
               <Link component={RouterLink} color="inherit" to="/auth/login">
-                Ingresar
+                Login
               </Link>
             </Grid>
           </Grid>

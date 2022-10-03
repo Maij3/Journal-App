@@ -27,15 +27,11 @@ export const LoginPage = () => {
 
   const { status, errorMessage } = useSelector((state) => state.auth);
 
-
   const dispatch = useDispatch();
-
 
   const { email, password, onInputChange } = useForm(formData);
 
-
   const isAuthenticating = useMemo(() => status === "checking", [status]);
-
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -110,9 +106,12 @@ export const LoginPage = () => {
                 <Typography sx={{ ml: 1 }}>Google</Typography>
               </Button>
             </Grid>
-            <Grid container direction="row" justifyContent="end" sx={{ mt: 2 }}>
+            <Grid container direction="row" justifyContent="space-evenly" sx={{ mt: 2 }}>
+              <Link component={RouterLink} color="inherit" to="/auth/forgot-you-password">
+                Did you forget your password ?
+              </Link>
               <Link component={RouterLink} color="inherit" to="/auth/register">
-                Crear una Cuenta
+                Create an account
               </Link>
             </Grid>
           </Grid>

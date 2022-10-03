@@ -31,7 +31,7 @@ export const SideBarItem = ({ title = "", body, id, date, imageUrls = [] }) => {
         <ListItemIcon>
           <TurnedInNot />
         </ListItemIcon>
-        <Grid container>
+        <Grid container sx={{ flexDirection:"column" }}>
           <ListItemText primary={newTitle} />
           <ListItemText secondary={newBody} />
         </Grid>

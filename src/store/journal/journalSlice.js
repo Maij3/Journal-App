@@ -5,6 +5,7 @@ export const journalSlice = createSlice({
   initialState: {
     isSaving: false,
     messageSaved: "",
+    messageDelete:"",
     notes: [],
     active: null,
   },
@@ -13,7 +14,6 @@ export const journalSlice = createSlice({
       state.isSaving = true;
     },
     addNewEmptyNote: (state, action) => {
-      console.log(action.payload);
       state.notes.push(action.payload);
       state.isSaving = false;
     },
@@ -36,7 +36,7 @@ export const journalSlice = createSlice({
         }
         return note;
       });
-      state.messageSaved = `${action.payload.title} , actualizar correctamente`;
+      state.messageSaved = `${action.payload.title} , Updated successfully`;
     },
     setPhotosToActiveNote: (state, action) => {
       state.active.imageUrls = [...state.active.imageUrls, ...action.payload];

@@ -16,6 +16,8 @@ export const startNewNote = () => {
   return async (dispatch, getState) => {
     dispatch(savingNewNotes());
     const { uid } = getState().auth;
+    const { notes } = getState().journal;
+    console.log({notes});
     const newNote = {
       title: "",
       body: "",
@@ -23,9 +25,7 @@ export const startNewNote = () => {
     };
     const newDoc = doc(collection(FiresbaseDB, `${uid}/journal/notes`));
     await setDoc(newDoc, newNote);
-
     newNote.id = newDoc.id;
-
     dispatch(addNewEmptyNote(newNote));
     dispatch(setActiveNote(newNote));
   };
@@ -73,5 +73,6 @@ export const startDeletingNote = () => {
     const docRef = doc( FiresbaseDB ,  `${ uid }/journal/notes/${ note.id }` )
     await deleteDoc(docRef)
     dispatch( deleteNoteById(note.id) )
+    console.log("Nota Borrada");
   };
 };
