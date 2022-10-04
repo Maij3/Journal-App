@@ -1,11 +1,11 @@
-import { Box, Toolbar } from "@mui/material";
-import {useSelector} from "react-redux";
+import { Box, Button, Toolbar } from "@mui/material";
+import {useState} from "react";
+import { useSelector } from "react-redux";
 import { Navbar, SideBar, Footer } from "../components";
 
 const drawerWidth = 240;
 
 export const JournalLayout = ({ children }) => {
-  
   return (
     <Box>
       <Box
@@ -13,7 +13,7 @@ export const JournalLayout = ({ children }) => {
         className="animate__animated animate__fadeIn animate__faster"
       >
         <Navbar drawerWidth={drawerWidth} />
-        <SideBar drawerWidth={drawerWidth} />
+        <SideBar drawerWidth={drawerWidth}/>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <Toolbar />
           {children}

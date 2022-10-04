@@ -29,8 +29,8 @@ export const ForgotYouPassword = () => {
     e.preventDefault();
     dispatch(startForgotYourPassword({ email }));
     setTimeout(() => {
-      navigate("/auth/login");
-    }, 300);
+      navigate(-1);
+    }, 800);
   };
   return (
     <AuthLayout title="Forgot You Password">

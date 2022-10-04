@@ -50,10 +50,9 @@ export const NoteView = () => {
 
   useEffect(() => {
     if (messageSaved.length > 0) {
-        Swal.fire("Note Updated", messageSaved, "success");
+      Swal.fire("Note Updated", messageSaved, "success");
     }
   }, [messageSaved]);
-
 
   const onSaveNote = () => {
     dispatch(startSaveNote());
@@ -75,13 +74,27 @@ export const NoteView = () => {
       justifyContent="space-between"
       sx={{ mb: 1 }}
     >
-      <Box sx={{ display: "flex", justifyContent: "inherit", width: "100%" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "inherit",
+          width: "100%",
+          flexDirection: { xs: "column", sm: "row", xl: "row" },
+          alignItems:{ sm:"center" , xl:"center" }
+        }}
+      >
         <Grid item>
-          <Typography fontSize={39} fontWeight="light">
+          <Typography
+            fontWeight="light"
+            sx={{ fontSize: { xs: "20px", sm: "20px", xl: "39px" } }}
+          >
             {dateString}
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid
+          item
+          sx={{ justifyContent: { xs: "end" }, display: { xs: "flex" } }}
+        >
           <input
             type="file"
             multiple

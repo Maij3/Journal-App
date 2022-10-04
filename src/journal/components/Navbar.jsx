@@ -1,27 +1,26 @@
-import { useState , useRef } from "react";
+import { useState, useRef } from "react";
 import { LogoutOutlined, MenuOutlined } from "@mui/icons-material";
 import { AppBar, Grid, IconButton, Toolbar, Typography } from "@mui/material";
-import {useDispatch} from "react-redux";
-import {startLogout} from "../../store/auth";
-import {setMenuBar} from "../../store/menu";
+import { useDispatch } from "react-redux";
+import { startLogout } from "../../store/auth";
+import { setIsOpen } from "../../store/menu";
 
-//Navbar 
-
+//Navbar
 
 export const Navbar = ({ drawerWidth = 240 }) => {
 
-
   //useDispach
   const dispatch = useDispatch();
-  
-  //onLogout
-  const onLogout = () =>{
-    dispatch(startLogout());
-  }
 
-  const onMenuIsOpen = ()=>{
-    dispatch(setMenuBar());
-  }
+  //onLogout
+  const onLogout = () => {
+    dispatch(startLogout());
+  };
+
+  //openDrawer
+  const openDrawer = () => {
+    dispatch(setIsOpen());
+  };
 
   return (
     <AppBar
@@ -36,6 +35,7 @@ export const Navbar = ({ drawerWidth = 240 }) => {
           color="inherit"
           edge="start"
           sx={{ mr: 2, display: { sm: "none" } }}
+          onClick={openDrawer}
         >
           <MenuOutlined />
         </IconButton>
@@ -43,11 +43,12 @@ export const Navbar = ({ drawerWidth = 240 }) => {
           container
           direction="row"
           justifyContent="space-between"
+          alignItems="center"
         >
           <Typography variant="h6" noWrap component="div">
             Notes
           </Typography>
-          <IconButton color="error" onClick={ onLogout }>
+          <IconButton color="error" onClick={onLogout}>
             <LogoutOutlined />
           </IconButton>
         </Grid>

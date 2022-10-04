@@ -13,4 +13,10 @@ export const purpleTheme = createTheme({
       main: red.A400,
     },
   },
+  transitions: {
+    duration: {
+      enteringScreen: 2000,
+      leavingScreen: 100,
+    },
+  },
 });

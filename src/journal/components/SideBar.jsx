@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { TurnedInNot } from "@mui/icons-material";
 import {
   Box,
+  Button,
   Divider,
   Drawer,
   Grid,
@@ -11,23 +13,36 @@ import {
   ListItemText,
   Toolbar,
   Typography,
+  Fade,
 } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { SideBarItem } from "./SideBarItem";
 import avatar from "../../assets/img/avatar.png";
+import { setIsClose } from "../../store/menu";
 //SideBar
 export const SideBar = ({ drawerWidth }) => {
-
+  const dispatch = useDispatch();
   const { displayName, photoURL } = useSelector((state) => state.auth);
   const { notes } = useSelector((state) => state.journal);
+  const { isOpen, isVariant, isFade } = useSelector((state) => state.menu);
+  const onClose = () => {
+    dispatch(setIsClose());
+  };
   return (
     <Box
       component="nav"
-      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+      sx={{
+        width: { sm: drawerWidth },
+        flexShrink: { sm: 0 },
+        display: { xs: "none", sm: "block", xl: "block" },
+      }}
     >
       <Drawer
-        variant="permanent"
-        open 
+        variant={isVariant}
+        open={isOpen}
+        anchor="left"
+        onClose={onClose ? onClose : null}
+        transitionDuration={ 800 }
         sx={{
           display: { sx: "block" },
           "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },

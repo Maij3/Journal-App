@@ -24,7 +24,6 @@ const formData = {
 };
 
 export const LoginPage = () => {
-
   const { status, errorMessage } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
@@ -95,7 +94,12 @@ export const LoginPage = () => {
                 Login
               </Button>
             </Grid>
-            <Grid item xs={12} sm={6} sx={{ mt: 3 }}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              sx={{ mt: { xs: "unset;", sm: 3, xl: 3 } }}
+            >
               <Button
                 disabled={isAuthenticating}
                 onClick={onGoogleSignIn}
@@ -106,8 +110,21 @@ export const LoginPage = () => {
                 <Typography sx={{ ml: 1 }}>Google</Typography>
               </Button>
             </Grid>
-            <Grid container direction="row" justifyContent="space-evenly" sx={{ mt: 2 }}>
-              <Link component={RouterLink} color="inherit" to="/auth/forgot-you-password">
+            <Grid
+              container
+              direction="row"
+              justifyContent="space-evenly"
+              sx={{
+                mt: 2,
+                flexDirection: { xs: "column", sm: "row", xl: "row" },
+                alignItems:{ xs:"center" , sm:"unset" , xl:"unset" }
+              }}
+            >
+              <Link
+                component={RouterLink}
+                color="inherit"
+                to="/auth/forgot-you-password"
+              >
                 Did you forget your password ?
               </Link>
               <Link component={RouterLink} color="inherit" to="/auth/register">

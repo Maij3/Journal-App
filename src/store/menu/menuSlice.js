@@ -3,13 +3,23 @@ import { createSlice } from "@reduxjs/toolkit";
 export const menuSlice = createSlice({
   name: "menu",
   initialState: {
-    left: false,
+    isOpen: false,
+    isVariant: "permanent",
+    isFade: true
   },
   reducers: {
-    setMenuBar: (state) => {
-      state.left = true;
+    setIsOpen: (state) => {
+      state.isOpen = true;
+      state.isVariant = "temporary"
+      state.isFade = true;
+    },
+    setIsClose: (state) => {
+      state.isOpen = false;
+      state.isVariant = "permanent"
+      state.isFade = false;
     },
   },
 });
 
-export const { setMenuBar } = menuSlice.actions;
+export const { setIsOpen, setIsClose } =
+  menuSlice.actions;

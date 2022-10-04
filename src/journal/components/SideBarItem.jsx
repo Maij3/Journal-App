@@ -9,12 +9,14 @@ import {
 } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { setActiveNote } from "../../store/journal/journalSlice";
+import {setIsClose} from "../../store/menu";
 
 export const SideBarItem = ({ title = "", body, id, date, imageUrls = [] }) => {
   const dispatch = useDispatch();
 
   const onClickNote = () => {
     dispatch(setActiveNote({ title , body , id , date , imageUrls }));
+    dispatch(setIsClose())
   };
 
   const newTitle = useMemo(() => {
