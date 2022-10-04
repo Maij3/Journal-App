@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { SideBarItem } from "./SideBarItem";
-import avatar from "../../assets/img/avatar.png";
+import avatar from "../../assets/avatar.png";
 import { setIsClose } from "../../store/menu";
 //SideBar
 export const SideBar = ({ drawerWidth }) => {
