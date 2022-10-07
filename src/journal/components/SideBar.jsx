@@ -28,6 +28,9 @@ export const SideBar = ({ drawerWidth }) => {
   const onClose = () => {
     dispatch(setIsClose());
   };
+  const deleteBlankNotes =  notes?.filter(note =>{ return note.title != "" })
+
+
   return (
     <Box
       component="nav"
@@ -65,7 +68,7 @@ export const SideBar = ({ drawerWidth }) => {
         </Typography>
         <Divider />
         <List>
-          {notes.map((note) => (
+          {deleteBlankNotes.map((note) => (
             <SideBarItem key={note.id} {...note} />
           ))}
         </List>

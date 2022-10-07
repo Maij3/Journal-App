@@ -8,7 +8,6 @@ export const ImageGallery = ({ images = [] }) => {
       {images.map((image , index) => (
         <ImageListItem key={index}>
           <img
-            style = {{ objectFit:'none' }}
             src={`${image}?w=164&h=164&fit=crop&auto=format`}
             srcSet={`${image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
             alt={image}

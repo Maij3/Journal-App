@@ -33,7 +33,6 @@ const formValidations = {
   displayName: [(value) => value.length >= 1, "Name is required."],
 };
 
-
 export const RegisterPage = () => {
   const dispatch = useDispatch();
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -129,7 +128,13 @@ export const RegisterPage = () => {
               </Button>
             </Grid>
 
-            <Grid container direction="row" justifyContent="end" sx={{ mt: 2 }}>
+            <Grid
+              container
+              direction={{ xs: "column", sm: "row", xl: "row" }}
+              justifyContent={{ xs: "center" }}
+              alignItems={{ xs: "center" }}
+              sx={{ mt: 2 }}
+            >
               <Typography sx={{ mr: 1 }}>
                 Do you already have an account ?
               </Typography>

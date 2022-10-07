@@ -14,6 +14,8 @@ export const journalSlice = createSlice({
       state.isSaving = true;
     },
     addNewEmptyNote: (state, action) => {
+      //console.log(action.payload)
+      state.notes = state.notes.filter(note =>{ return note.title != ""  })
       state.notes.push(action.payload);
       state.isSaving = false;
     },
@@ -40,6 +42,7 @@ export const journalSlice = createSlice({
     },
     setPhotosToActiveNote: (state, action) => {
       state.active.imageUrls = [...state.active.imageUrls, ...action.payload];
+      console.log(state.active.imageUrls)
       state.isSaving = false;
     },
     clearNotesLogout: (state) => {

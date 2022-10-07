@@ -17,11 +17,11 @@ export const startNewNote = () => {
     dispatch(savingNewNotes());
     const { uid } = getState().auth;
     const { notes } = getState().journal;
-    console.log({notes});
     const newNote = {
       title: "",
       body: "",
       date: new Date().getTime(),
+      imageUrls:[]
     };
     const newDoc = doc(collection(FiresbaseDB, `${uid}/journal/notes`));
     await setDoc(newDoc, newNote);
@@ -61,7 +61,9 @@ export const startUploadingFiles = (files = []) => {
     for (const file of files) {
       fileUploadPromises.push(fileUpload(file));
     }
+    console.log(fileUploadPromises);
     const photoUrls = await Promise.all(fileUploadPromises);
+    console.log({ photoUrls });
     dispatch(setPhotosToActiveNote(photoUrls));
   };
 };
@@ -70,9 +72,9 @@ export const startDeletingNote = () => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
     const { active: note } = getState().journal;
-    const docRef = doc( FiresbaseDB ,  `${ uid }/journal/notes/${ note.id }` )
-    await deleteDoc(docRef)
-    dispatch( deleteNoteById(note.id) )
+    const docRef = doc(FiresbaseDB, `${uid}/journal/notes/${note.id}`);
+    await deleteDoc(docRef);
+    dispatch(deleteNoteById(note.id));
     console.log("Nota Borrada");
   };
 };

@@ -69,7 +69,12 @@ export const ForgotYouPassword = () => {
                 Send
               </Button>
             </Grid>
-            <Grid container direction="row" justifyContent="end" sx={{ mt: 2 }}>
+            <Grid
+              container
+              direction="row"
+              justifyContent={{ xs: "center", sm: "end", xl: "end" }}
+              sx={{ mt: 2 }}
+            >
               <Link component={RouterLink} color="inherit" to="/auth/register">
                 Create an account ?
               </Link>

@@ -80,7 +80,7 @@ export const NoteView = () => {
           justifyContent: "inherit",
           width: "100%",
           flexDirection: { xs: "column", sm: "row", xl: "row" },
-          alignItems:{ sm:"center" , xl:"center" }
+          alignItems: { sm: "center", xl: "center" },
         }}
       >
         <Grid item>
@@ -106,6 +106,7 @@ export const NoteView = () => {
             onClick={() => fileInputRef.current.click()}
             color="primary"
             disabled={isSaving}
+            sx={{ ":hover": { background: "#FFF" } }}
           >
             <UploadOutlined />
           </IconButton>
