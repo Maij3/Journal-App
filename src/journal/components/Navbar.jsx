@@ -8,7 +8,6 @@ import { setIsOpen } from "../../store/menu";
 //Navbar
 
 export const Navbar = ({ drawerWidth = 240 }) => {
-
   //useDispach
   const dispatch = useDispatch();
 
@@ -26,7 +25,7 @@ export const Navbar = ({ drawerWidth = 240 }) => {
     <AppBar
       position="fixed"
       sx={{
-        width: { sm: `calc(100% - ${drawerWidth}px)` },
+        width: { xl: `calc(100% - ${drawerWidth}px)` },
         ml: { sm: `${drawerWidth}px` },
       }}
     >
@@ -34,7 +33,7 @@ export const Navbar = ({ drawerWidth = 240 }) => {
         <IconButton
           color="inherit"
           edge="start"
-          sx={{ mr: 2, display: { sm: "none" } }}
+          sx={{ mr: 2, display: { xs: "block", sm: "block", xl: "none" } }}
           onClick={openDrawer}
         >
           <MenuOutlined />

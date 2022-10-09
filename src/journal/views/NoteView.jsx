@@ -23,6 +23,7 @@ import {
 } from "../../store/journal";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
+import { CheckingJournal } from "../../ui";
 //NoteViews
 
 export const NoteView = () => {
@@ -31,7 +32,6 @@ export const NoteView = () => {
   const {
     active: note,
     messageSaved,
-    messageDelete,
     isSaving,
   } = useSelector((state) => state.journal);
 
@@ -66,7 +66,6 @@ export const NoteView = () => {
   const onDelete = () => {
     dispatch(startDeletingNote());
   };
-
   return (
     <Grid
       container
@@ -124,7 +123,6 @@ export const NoteView = () => {
       <Grid container>
         <TextField
           type="text"
-          variant="filled"
           fullWidth
           placeholder="Ingrese un Titulo"
           label="Title"
@@ -154,7 +152,7 @@ export const NoteView = () => {
           Delete
         </Button>
       </Grid>
-      <ImageGallery images={note.imageUrls} />
+      {isSaving ? <CheckingJournal/> : <ImageGallery images={note.imageUrls} />}
     </Grid>
   );
 };

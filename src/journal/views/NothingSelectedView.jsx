@@ -1,7 +1,17 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, Snackbar, Alert } from "@mui/material";
 import { StarOutline } from "@mui/icons-material";
+import { useSelector, useDispatch } from "react-redux";
+import { setAlertOpen } from "../../store/journal";
 
 export const NothingSelectedView = () => {
+  const dispatch = useDispatch();
+
+  const { messageDelete, alertOpen } = useSelector((state) => state.journal);
+
+  const handleClose = () => {
+    dispatch(setAlertOpen());
+  };
+
   return (
     <Grid
       className="animate__animated animate__fadeIn animate__faster"
@@ -23,6 +33,20 @@ export const NothingSelectedView = () => {
           Select or Create a note
         </Typography>
       </Grid>
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        open={alertOpen}
+        onClose={handleClose}
+        autoHideDuration={1500}
+        sx={{
+          transform:{ xl:"translateX(-12%) !important" }
+        }}
+        key={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          {messageDelete}
+        </Alert>
+      </Snackbar>
     </Grid>
   );
 };

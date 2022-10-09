@@ -5,9 +5,11 @@ export const journalSlice = createSlice({
   initialState: {
     isSaving: false,
     messageSaved: "",
-    messageDelete:"",
+    alertOpen: false,
+    messageDelete: "",
     notes: [],
     active: null,
+    isLoading: true,
   },
   reducers: {
     savingNewNotes: (state) => {
@@ -15,7 +17,9 @@ export const journalSlice = createSlice({
     },
     addNewEmptyNote: (state, action) => {
       //console.log(action.payload)
-      state.notes = state.notes.filter(note =>{ return note.title != ""  })
+      state.notes = state.notes.filter((note) => {
+        return note.title != "";
+      });
       state.notes.push(action.payload);
       state.isSaving = false;
     },
@@ -42,7 +46,6 @@ export const journalSlice = createSlice({
     },
     setPhotosToActiveNote: (state, action) => {
       state.active.imageUrls = [...state.active.imageUrls, ...action.payload];
-      console.log(state.active.imageUrls)
       state.isSaving = false;
     },
     clearNotesLogout: (state) => {
@@ -50,10 +53,23 @@ export const journalSlice = createSlice({
       state.messageSaved = "";
       state.notes = [];
       state.active = null;
+      state.isLoading = true;
+      state.messageDelete = "";
+      state.alertOpen = false;
+    },
+    preloaderImage: (state) => {
+      state.isLoading = false;
     },
     deleteNoteById: (state, action) => {
       state.active = null;
       state.notes = state.notes.filter((note) => note.id !== action.payload);
+    },
+    setMessageDeleted: (state, action) => {
+      state.messageDelete = `${action.payload.length > 0 ? action.payload :  "Erased Blank Note" } , Deleted Successfully`;
+      state.alertOpen = true;
+    },
+    setAlertOpen: (state) => {
+      state.alertOpen = false;
     },
   },
 });
@@ -68,4 +84,7 @@ export const {
   savingNewNotes,
   setPhotosToActiveNote,
   clearNotesLogout,
+  preloaderImage,
+  setMessageDeleted,
+  setAlertOpen,
 } = journalSlice.actions;

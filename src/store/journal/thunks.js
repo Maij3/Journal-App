@@ -10,6 +10,7 @@ import {
   updateNote,
   setPhotosToActiveNote,
   deleteNoteById,
+  setMessageDeleted,
 } from "./journalSlice";
 
 export const startNewNote = () => {
@@ -21,7 +22,7 @@ export const startNewNote = () => {
       title: "",
       body: "",
       date: new Date().getTime(),
-      imageUrls:[]
+      imageUrls: [],
     };
     const newDoc = doc(collection(FiresbaseDB, `${uid}/journal/notes`));
     await setDoc(newDoc, newNote);
@@ -71,10 +72,11 @@ export const startUploadingFiles = (files = []) => {
 export const startDeletingNote = () => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
-    const { active: note } = getState().journal;
+    const { active: note , messageDelete } = getState().journal;
+    console.log("Title" , note.title)
     const docRef = doc(FiresbaseDB, `${uid}/journal/notes/${note.id}`);
     await deleteDoc(docRef);
     dispatch(deleteNoteById(note.id));
-    console.log("Nota Borrada");
+    dispatch(setMessageDeleted(note.title))
   };
 };

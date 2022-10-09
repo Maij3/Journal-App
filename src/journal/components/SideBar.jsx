@@ -37,7 +37,7 @@ export const SideBar = ({ drawerWidth }) => {
       sx={{
         width: { sm: drawerWidth },
         flexShrink: { sm: 0 },
-        display: { xs: "none", sm: "block", xl: "block" },
+        display: { xs: "none", sm: "none", xl: "block" },
       }}
     >
       <Drawer
