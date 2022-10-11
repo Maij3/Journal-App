@@ -37,7 +37,7 @@ export const NothingSelectedView = () => {
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         open={alertOpen}
         onClose={handleClose}
-        autoHideDuration={1500}
+        autoHideDuration={6000}
         sx={{
           transform:{ xl:"translateX(-12%) !important" }
         }}

@@ -46,37 +46,39 @@ export const startSaveNote = () => {
     dispatch(setSaving());
     const { uid } = getState().auth;
     const { active: note } = getState().journal;
+    console.log({ note });
     const noteToFireStore = { ...note };
     delete noteToFireStore.id;
     const docRef = doc(FiresbaseDB, `${uid}/journal/notes/${note.id}`);
     await setDoc(docRef, noteToFireStore, { merge: true });
     dispatch(updateNote(note));
+    console.log({ note });
   };
 };
 
 export const startUploadingFiles = (files = []) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch(setSaving());
     //await fileUpload(files[0])
     const fileUploadPromises = [];
     for (const file of files) {
       fileUploadPromises.push(fileUpload(file));
     }
-    console.log(fileUploadPromises);
     const photoUrls = await Promise.all(fileUploadPromises);
-    console.log({ photoUrls });
     dispatch(setPhotosToActiveNote(photoUrls));
+    //
+    dispatch(startSaveNote());
   };
 };
 
 export const startDeletingNote = () => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
-    const { active: note , messageDelete } = getState().journal;
-    console.log("Title" , note.title)
+    const { active: note, messageDelete } = getState().journal;
+    console.log("Title", note.title);
     const docRef = doc(FiresbaseDB, `${uid}/journal/notes/${note.id}`);
     await deleteDoc(docRef);
     dispatch(deleteNoteById(note.id));
-    dispatch(setMessageDeleted(note.title))
+    dispatch(setMessageDeleted(note.title));
   };
 };

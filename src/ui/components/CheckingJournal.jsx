@@ -9,7 +9,7 @@ export const CheckingJournal = () => {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      sx={{ minHeight: "100vh", backgroundColor: "#FFF", padding: 4 }}
+      sx={{ minHeight: "70vh", backgroundColor: "#EEE", padding: 4 }}
     >
       <Grid item  >
         <CircularProgress color='warning' />

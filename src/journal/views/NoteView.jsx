@@ -11,21 +11,23 @@ import {
   TextField,
   Typography,
   IconButton,
+  Alert,
+  Snackbar
 } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "../../hooks/useForm";
 import { ImageGallery } from "../components";
 import {
   setActiveNote,
+  setAlertOpen,
+  setMessageErrorSave,
   startDeletingNote,
   startSaveNote,
   startUploadingFiles,
 } from "../../store/journal";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
-import { CheckingJournal } from "../../ui";
-//NoteViews
-
+import { CheckingJournal } from "../../ui"; //NoteViews
 export const NoteView = () => {
   const dispatch = useDispatch();
 
@@ -33,6 +35,8 @@ export const NoteView = () => {
     active: note,
     messageSaved,
     isSaving,
+    messageErrorSave,
+    alertOpen,
   } = useSelector((state) => state.journal);
 
   const { body, date, title, onInputChange, formState } = useForm(note);
@@ -55,16 +59,45 @@ export const NoteView = () => {
   }, [messageSaved]);
 
   const onSaveNote = () => {
+    if (title.length <= 0 || body.length <= 0) {
+      dispatch(setMessageErrorSave());
+      return;
+    }
     dispatch(startSaveNote());
   };
 
   const onFileInputChange = ({ target }) => {
     if (target.files === 0) return;
+    if (title.length <= 0 || body.length <= 0) {
+      dispatch(setMessageErrorSave());
+      return;
+    }
     dispatch(startUploadingFiles(target.files));
   };
 
   const onDelete = () => {
     dispatch(startDeletingNote());
+  };
+
+  //const handleKeyDown = (event) => {
+    //let charCode = String.fromCharCode(event.which).toLowerCase();
+    //if (
+      //(event.ctrlKey || event.metaKey) &&
+      //event.shiftKey &&
+      //charCode === "s"
+    //) {
+      //if (title.length <= 0 || body.length <= 0) return;
+      //dispatch(startSaveNote());
+    //} else if (
+      //(event.ctrlKey || event.metaKey) &&
+      //event.shiftKey &&
+      //charCode === "x"
+    //) {
+      //dispatch(startDeletingNote());
+    //}
+  //};
+  const handleClose = () => {
+    dispatch(setAlertOpen());
   };
   return (
     <Grid
@@ -100,6 +133,7 @@ export const NoteView = () => {
             onChange={onFileInputChange}
             style={{ display: "none" }}
             ref={fileInputRef}
+            accept="image/jpeg"
           />
           <IconButton
             onClick={() => fileInputRef.current.click()}
@@ -152,7 +186,25 @@ export const NoteView = () => {
           Delete
         </Button>
       </Grid>
-      {isSaving ? <CheckingJournal/> : <ImageGallery images={note.imageUrls} />}
+      {isSaving ? (
+        <CheckingJournal />
+      ) : (
+        <ImageGallery images={note.imageUrls} />
+      )}
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        open={alertOpen}
+        onClose={handleClose}
+        autoHideDuration={6000}
+        sx={{
+          transform: { xl: "translateX(-12%) !important" },
+        }}
+        key={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          {messageErrorSave}
+        </Alert>
+      </Snackbar>
     </Grid>
   );
 };

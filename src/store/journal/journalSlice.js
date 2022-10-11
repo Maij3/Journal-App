@@ -7,6 +7,7 @@ export const journalSlice = createSlice({
     messageSaved: "",
     alertOpen: false,
     messageDelete: "",
+    messageErrorSave: "",
     notes: [],
     active: null,
     isLoading: true,
@@ -55,6 +56,7 @@ export const journalSlice = createSlice({
       state.active = null;
       state.isLoading = true;
       state.messageDelete = "";
+      state.messageErrorSave="";
       state.alertOpen = false;
     },
     preloaderImage: (state) => {
@@ -66,6 +68,10 @@ export const journalSlice = createSlice({
     },
     setMessageDeleted: (state, action) => {
       state.messageDelete = `${action.payload.length > 0 ? action.payload :  "Erased Blank Note" } , Deleted Successfully`;
+      state.alertOpen = true;
+    },
+    setMessageErrorSave: (state) =>{
+      state.messageErrorSave = "Error the title or the body of the text are empty" 
       state.alertOpen = true;
     },
     setAlertOpen: (state) => {
@@ -86,5 +92,6 @@ export const {
   clearNotesLogout,
   preloaderImage,
   setMessageDeleted,
+  setMessageErrorSave,
   setAlertOpen,
 } = journalSlice.actions;
