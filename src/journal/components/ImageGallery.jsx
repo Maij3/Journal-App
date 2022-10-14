@@ -18,7 +18,7 @@ export const ImageGallery = ({ images = [] }) => {
   }, []);
 
   return (
-    <ImageList sx={{ width: "100%", height: 450 }} cols={3} rowHeight={164}>
+    <ImageList sx={{ width: "100%", height: 450 }} cols={3} >
       {images.map((image, index) => (
         <ImageListItem key={index}>
           {isLoading ? (
@@ -34,6 +34,7 @@ export const ImageGallery = ({ images = [] }) => {
               srcSet={`${image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
               alt={image}
               loading="lazy"
+              style={{ objectFit: "contain" }}
             />
           )}
         </ImageListItem>

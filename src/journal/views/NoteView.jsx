@@ -178,7 +178,7 @@ export const NoteView = () => {
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         open={alertOpen}
         onClose={handleClose}
-        autoHideDuration={6000}
+        autoHideDuration={3000}
         sx={{
           transform: { xl: "translateX(-12%) !important" },
         }}

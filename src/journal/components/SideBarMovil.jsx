@@ -23,10 +23,6 @@ export const SideBarMovil = ({ drawerWidth }) => {
     dispatch(setIsClose());
   };
 
-  const deleteBlankNotes = notes?.filter((note) => {
-    return note.title != "";
-  });
-
   return (
     <Drawer
       open={isOpen}
@@ -55,8 +51,8 @@ export const SideBarMovil = ({ drawerWidth }) => {
       </Typography>
       <Divider />
       <List>
-        {deleteBlankNotes.map((note) => (
-          <SideBarItem key={note.id} {...note} />
+        {notes.map((note , key) => (
+          <SideBarItem key={key} {...note} />
         ))}
       </List>
     </Drawer>

@@ -25,11 +25,14 @@ export const startNewNote = () => {
       date: new Date().getTime(),
       imageUrls: [],
     };
-    const newDoc = doc(collection(FiresbaseDB, `${uid}/journal/notes`));
-    await setDoc(newDoc, newNote);
-    newNote.id = newDoc.id;
+    const { title } = newNote;
     dispatch(addNewEmptyNote(newNote));
     dispatch(setActiveNote(newNote));
+    if (!title.length <= 0) {
+      const newDoc = doc(collection(FiresbaseDB, `${uid}/journal/notes`));
+      await setDoc(newDoc, newNote);
+      newNote.id = newDoc.id;
+    }
   };
 };
 
@@ -56,7 +59,6 @@ export const startSaveNote = () => {
     console.log({ note });
   };
 };
-
 
 export const startSaveImage = () => {
   return async (dispatch, getState) => {
