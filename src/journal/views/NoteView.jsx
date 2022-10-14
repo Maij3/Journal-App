@@ -79,23 +79,6 @@ export const NoteView = () => {
     dispatch(startDeletingNote());
   };
 
-  //const handleKeyDown = (event) => {
-    //let charCode = String.fromCharCode(event.which).toLowerCase();
-    //if (
-      //(event.ctrlKey || event.metaKey) &&
-      //event.shiftKey &&
-      //charCode === "s"
-    //) {
-      //if (title.length <= 0 || body.length <= 0) return;
-      //dispatch(startSaveNote());
-    //} else if (
-      //(event.ctrlKey || event.metaKey) &&
-      //event.shiftKey &&
-      //charCode === "x"
-    //) {
-      //dispatch(startDeletingNote());
-    //}
-  //};
   const handleClose = () => {
     dispatch(setAlertOpen());
   };

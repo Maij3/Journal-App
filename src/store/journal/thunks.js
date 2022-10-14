@@ -11,6 +11,7 @@ import {
   setPhotosToActiveNote,
   deleteNoteById,
   setMessageDeleted,
+  updateImage,
 } from "./journalSlice";
 
 export const startNewNote = () => {
@@ -56,6 +57,22 @@ export const startSaveNote = () => {
   };
 };
 
+
+export const startSaveImage = () => {
+  return async (dispatch, getState) => {
+    dispatch(setSaving());
+    const { uid } = getState().auth;
+    const { active: note } = getState().journal;
+    console.log({ note });
+    const noteToFireStore = { ...note };
+    delete noteToFireStore.id;
+    const docRef = doc(FiresbaseDB, `${uid}/journal/notes/${note.id}`);
+    await setDoc(docRef, noteToFireStore, { merge: true });
+    dispatch(updateImage(note));
+    console.log({ note });
+  };
+};
+
 export const startUploadingFiles = (files = []) => {
   return async (dispatch, getState) => {
     dispatch(setSaving());
@@ -67,7 +84,7 @@ export const startUploadingFiles = (files = []) => {
     const photoUrls = await Promise.all(fileUploadPromises);
     dispatch(setPhotosToActiveNote(photoUrls));
     //
-    dispatch(startSaveNote());
+    //dispatch(startSaveImage());
   };
 };
 
