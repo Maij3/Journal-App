@@ -6,8 +6,7 @@ export const journalSlice = createSlice({
     isSaving: false,
     messageSaved: "",
     alertOpen: false,
-    messageDelete: "",
-    messageErrorSave: "",
+    message: "",
     notes: [],
     active: null,
     isLoading: true,
@@ -76,11 +75,15 @@ export const journalSlice = createSlice({
       state.notes = state.notes.filter((note) => note.id !== action.payload);
     },
     setMessageDeleted: (state, action) => {
-      state.messageDelete = `${action.payload.length > 0 ? action.payload :  "Erased Blank Note" } , Deleted Successfully`;
+      state.message = `${action.payload.length > 0 ? action.payload :  "Erased Blank Note" } , Deleted Successfully`;
       state.alertOpen = true;
     },
+    setMessageImage:(state) =>{
+      state.message="It is not a correct Image format, the correct format is jpg or jpeg or exceeds the size of 25kb.";
+      state.alertOpen= true; 
+    },
     setMessageErrorSave: (state) =>{
-      state.messageErrorSave = "Error the title or the body of the text are empty" 
+      state.message = "Error the title or the body of the text are empty" 
       state.alertOpen = true;
     },
     setAlertOpen: (state) => {
@@ -103,5 +106,6 @@ export const {
   setMessageDeleted,
   setMessageErrorSave,
   setAlertOpen,
-  updateImage
+  updateImage,
+  setMessageImage
 } = journalSlice.actions;

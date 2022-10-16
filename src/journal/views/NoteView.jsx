@@ -35,7 +35,7 @@ export const NoteView = () => {
     active: note,
     messageSaved,
     isSaving,
-    messageErrorSave,
+    message,
     alertOpen,
   } = useSelector((state) => state.journal);
 
@@ -185,7 +185,7 @@ export const NoteView = () => {
         key={{ vertical: "bottom", horizontal: "center" }}
       >
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          {messageErrorSave}
+          {message}
         </Alert>
       </Snackbar>
     </Grid>

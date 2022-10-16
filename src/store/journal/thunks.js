@@ -12,6 +12,7 @@ import {
   deleteNoteById,
   setMessageDeleted,
   updateImage,
+  setMessageImage,
 } from "./journalSlice";
 
 export const startNewNote = () => {
@@ -81,7 +82,15 @@ export const startUploadingFiles = (files = []) => {
     //await fileUpload(files[0])
     const fileUploadPromises = [];
     for (const file of files) {
-      fileUploadPromises.push(fileUpload(file));
+      if (file.type === "image/jpg" || file.type === "image/jpeg") {
+        if (file.size <= 25000) {
+          fileUploadPromises.push(fileUpload(file));
+        } else {
+          dispatch(setMessageImage());
+        }
+      } else {
+        dispatch(setMessageImage());
+      }
     }
     const photoUrls = await Promise.all(fileUploadPromises);
     dispatch(setPhotosToActiveNote(photoUrls));

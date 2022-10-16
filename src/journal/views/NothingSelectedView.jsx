@@ -6,7 +6,7 @@ import { setAlertOpen } from "../../store/journal";
 export const NothingSelectedView = () => {
   const dispatch = useDispatch();
 
-  const { messageDelete, alertOpen } = useSelector((state) => state.journal);
+  const { message, alertOpen } = useSelector((state) => state.journal);
 
   const handleClose = () => {
     dispatch(setAlertOpen());
@@ -44,7 +44,7 @@ export const NothingSelectedView = () => {
         key={{ vertical: "bottom", horizontal: "center" }}
       >
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          {messageDelete}
+          {message}
         </Alert>
       </Snackbar>
     </Grid>
