@@ -25,24 +25,18 @@ export const singInWithGoogle = async () => {
 
     return {
       ok: true,
-      //--------------------
       //User Info
-      //--------------------
       displayName,
       email,
       photoURL,
       uid,
     };
   } catch (error) {
-    //------------------
     //Error Code
-    //------------------
     console.log(error);
     const errorCode = error.code;
 
-    //------------------
     //Error Message
-    //------------------
 
     const errorMessage = error.message;
     console.log("Error Message", errorMessage);
