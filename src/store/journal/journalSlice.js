@@ -79,7 +79,7 @@ export const journalSlice = createSlice({
       state.alertOpen = true;
     },
     setMessageImage:(state) =>{
-      state.message="It is not a correct Image format, the correct format is jpg or jpeg or exceeds the size of 25kb.";
+      state.message="It is not a correct Image format, the correct format is jpg or jpeg or exceeds the size of 125kb.";
       state.alertOpen= true; 
     },
     setMessageErrorSave: (state) =>{

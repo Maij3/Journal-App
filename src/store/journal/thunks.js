@@ -83,7 +83,7 @@ export const startUploadingFiles = (files = []) => {
     const fileUploadPromises = [];
     for (const file of files) {
       if (file.type === "image/jpg" || file.type === "image/jpeg") {
-        if (file.size <= 125000) {
+        if (file.size <= 1125000) {
           fileUploadPromises.push(fileUpload(file));
         } else {
           dispatch(setMessageImage());
