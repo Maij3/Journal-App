@@ -28,7 +28,9 @@ import {
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
 import { CheckingJournal } from "../../ui"; //NoteViews
+//import {fileDelete} from "../../helpers/fileDelete";
 export const NoteView = () => {
+
   const dispatch = useDispatch();
 
   const {
@@ -77,6 +79,7 @@ export const NoteView = () => {
 
   const onDelete = () => {
     dispatch(startDeletingNote());
+    //fileDelete();
   };
 
   const handleClose = () => {

@@ -1,5 +1,6 @@
 export const fileUpload = async (file) => {
   if (!file) throw new Error("No tenemos archivos a subir");
+//  if(!file) return null;
   const cloudUrl = "https://api.cloudinary.com/v1_1/dcpb3uam1/upload";
   const formData = new FormData();
   formData.append("upload_preset", "react-journal");
@@ -10,10 +11,12 @@ export const fileUpload = async (file) => {
       body: formData,
     });
     console.log({ resp });
+    console.log({ file })
     if (!resp.ok) throw new Error("No se pudo subir el archivo");
     const cloudResp = await resp.json();
     return cloudResp.secure_url;
   } catch (error) {
-    throw new Error(error.message);
+     throw new Error(error.message);
+//return null;
   }
 };
