@@ -17,10 +17,6 @@ export const SideBarDesktop = ({ drawerWidth }) => {
     dispatch(setIsClose());
   };
 
-  console.log({ notes });
-  const deleteBlankNotes = notes?.filter((note) => {
-    return note.title != "";
-  });
   return (
     <Drawer
       variant={isVariant}
@@ -50,7 +46,7 @@ export const SideBarDesktop = ({ drawerWidth }) => {
       </Typography>
       <Divider />
       <List>
-        {deleteBlankNotes.map((note, key) => (
+        {notes.map((note, key) => (
           <SideBarItem key={key} {...note} />
         ))}
       </List>

@@ -26,16 +26,11 @@ export const startNewNote = () => {
       date: new Date().getTime(),
       imageUrls: [],
     };
-    const { title } = newNote;
-//    dispatch(addNewEmptyNote(newNote));
-//    dispatch(setActiveNote(newNote));
-//    if (!title.length <= 0) {
-      const newDoc = doc(collection(FiresbaseDB, `${uid}/journal/notes`));
-      await setDoc(newDoc, newNote);
-      newNote.id = newDoc.id;
-      dispatch(addNewEmptyNote(newNote));
-      dispatch(setActiveNote(newNote));
-//    }
+    const newDoc = doc(collection(FiresbaseDB, `${uid}/journal/notes`));
+    await setDoc(newDoc, newNote);
+    newNote.id = newDoc.id;
+    dispatch(addNewEmptyNote(newNote));
+    dispatch(setActiveNote(newNote));
   };
 };
 
@@ -44,7 +39,10 @@ export const startLoadingNotes = () => {
     const { uid } = getState().auth;
     if (!uid) throw new Error("El UID del usuario no existe");
     const notes = await loadNotes(uid);
-    dispatch(setNotes(notes));
+    const newNotes = notes.filter((note) => {
+    if (note.title != "") return note;
+    });
+    dispatch(setNotes(newNotes));
   };
 };
 
@@ -84,7 +82,7 @@ export const startUploadingFiles = (files = []) => {
     //await fileUpload(files[0])
     const fileUploadPromises = [];
     for (const file of files) {
-      console.log(file)
+      console.log(file);
       if (file.type === "image/jpg" || file.type === "image/jpeg") {
         if (file.size <= 1125000) {
           fileUploadPromises.push(fileUpload(file));

@@ -16,10 +16,10 @@ export const journalSlice = createSlice({
       state.isSaving = true;
     },
     addNewEmptyNote: (state, action) => {
-      //console.log(action.payload)
-      //state.notes = state.notes.filter((note) => {
-        //return note.title != "";
-      //});
+      console.log(state.notes)
+      state.notes = state.notes.filter((note) => {
+        return note.title != "";
+      });
       state.notes.push(action.payload);
       state.isSaving = false;
     },
